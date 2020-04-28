@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     info.addEventListener('click', function(e) {
-        let target = event.target;
+        let target = e.target;
         if(target && target.classList.contains('info-header-tab')) {
             for(let i = 0; i < tab.length; i++) {
                 if(target == tab[i]) {
@@ -82,4 +82,35 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     setClock('timer', deadline);
+
+    // Modal
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close'),
+        tabDescrBtn = document.querySelectorAll('.description-btn');
+
+    more.addEventListener('click', function() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+
+    tabDescrBtn.forEach(btn => {
+        btn.addEventListener('click', modalOpen)
+    });
+
+    function modalOpen() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    };
+
+
+    close.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
+
 });
